@@ -1,0 +1,25 @@
+.navbar {
+  height: 90px;
+  margin: 0;
+}
+.container {
+  width: 100%;
+}
+
+.navbar > .container {
+  justify-content: space-evenly;
+  /* display: flex; */
+  margin: 0;
+  width: 100%;
+}
+
+.navbarItem {
+  color: #9d1949;
+  font-size: 20px;
+  font-family: "Amsterdam_One";
+}
+
+.linkSocialNetworks {
+  right: 0;
+  display: flex;
+}
