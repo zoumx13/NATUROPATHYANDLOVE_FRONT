@@ -1,0 +1,36 @@
+.prestationDetails {
+  flex-direction: column;
+  width: 100%;
+  padding: 5% 10% 5% 10%;
+}
+
+.bigtitleDetails {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+.textDetails {
+  width: 100%;
+}
+h3 {
+  font-family: "Amsterdam_One";
+  color: #da0f4c;
+  font-size: 50px !important;
+  padding-bottom: 20px;
+}
+h4 {
+  font-family: "Magnolia_Script";
+  font-size: 20px !important;
+}
+p {
+  padding-top: 20px;
+  font-family: "Lustria_Regular";
+  font-size: 14px !important;
+}
+
+.imgDetails {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
