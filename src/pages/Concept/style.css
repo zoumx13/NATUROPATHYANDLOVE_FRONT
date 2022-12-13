@@ -1,0 +1,19 @@
+.detailsQui {
+  margin: 5vh 10vh;
+}
+.resumeQui {
+  font-family: "Lustria_Regular";
+  text-align: center;
+  color: #ff2a71;
+}
+.subtitleQui {
+  margin-top: 2%;
+  font-family: "Magnolia_Script";
+  font-size: 30px;
+  color: #0f797d;
+}
+.paragrapheQui {
+  text-align: justify;
+  font-family: "Lustria_Regular";
+  color: #9d1949;
+}

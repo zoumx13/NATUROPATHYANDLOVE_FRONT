@@ -5,6 +5,26 @@
 ul {
   list-style-type: none;
 }
+.h2home {
+  font-size: 40px;
+  color: #ff2a71;
+  font-family: "Amsterdam_One";
+  text-align: center;
+  margin: 5% 0;
+}
+.seperate {
+  display: flex;
+  flex-direction: row;
+  height: 2px;
+  width: 100%;
+}
+.seperateExt {
+  width: 33%;
+}
+.seperateMiddle {
+  background-color: #0f797d;
+  width: 33%;
+}
 
 /* VIDEO ACCUEIL */
 video {
@@ -23,6 +43,7 @@ video {
   align-items: center;
   color: white;
   z-index: 0;
+  flex-direction: column;
 }
 .overlay {
   position: absolute;
@@ -31,38 +52,101 @@ video {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.3);
 }
-.heading {
+.heading-title {
   font-family: "Amsterdam_One";
-  margin-bottom: 50vh;
+  font-size: 50px;
+  margin-bottom: 10vh;
+}
+.heading-subtitle {
+  font-family: "Magnolia_Script";
+  font-size: 20px;
 }
 
 /* BORDEREAU CATEGORY */
 .category {
-  padding: 10% 0;
+  padding: 5% 0;
   width: 100%;
-  height: 25vh;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
 }
-h2 {
-  color: #ff2a71;
-  font-size: 24px;
-  font-family: "Amsterdam_One";
-  text-align: center;
+
+/* QUI SUIS-JE */
+.quisuije {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.containerImgQui {
+  width: 100%;
+  max-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 5%;
+}
+.imgQui {
+  max-width: 40vh;
+  max-height: 40vh;
+}
+
+/* CONCEPT */
+.concept {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.containerImgConcept {
+  width: 100%;
+  max-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 5%;
+}
+.imgConcept {
+  max-width: 40vh;
+  max-height: 40vh;
 }
 
 /* PRESTATION */
 .home > .prestations {
   overflow: hidden;
   width: 100%;
-  max-height: 50vh;
   display: flex;
   flex-direction: row;
 }
 .picturesPrestation {
   width: 50%;
+  max-height: 100vh;
+}
+.carousselPrestation {
+  width: 100%;
+  height: 100%;
+}
+.carousel-item {
+  width: 100%;
+  height: 100%;
+}
+.carousel-inner {
+  width: 100%;
+  height: 100%;
+}
+.carousel-item {
+  max-width: 100%;
+  max-height: 100%;
+}
+.imgCaroussel {
+  min-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
 }
 .detailsPrestation {
   width: 100%;
@@ -82,10 +166,9 @@ h2 {
 }
 .liPrestations {
   text-align: center;
-  border-radius: 50%;
   border: #ff2a71 solid 5px;
   background-color: #ff2a71;
-  margin-top: 5px;
+  margin-top: 20px;
   width: 50%;
 }
 .liPrestations a {

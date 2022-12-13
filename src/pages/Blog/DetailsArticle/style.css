@@ -1,0 +1,17 @@
+.btnAdminArticle {
+  margin-bottom: 10vh;
+  display: flex;
+  flex-direction: row;
+}
+
+.hover:hover {
+  border: red solid 2px;
+}
+
+.blockTextEditor {
+  font-family: sans-serif;
+  width: 100%;
+  margin: 1rem auto;
+  padding: 0.5rem;
+  border: 1px solid #999;
+}

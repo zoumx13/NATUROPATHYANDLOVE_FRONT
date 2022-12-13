@@ -1,0 +1,16 @@
+.dropdown-item {
+  font-family: "Amsterdam_One";
+  color: #ff2a71 !important;
+  font-size: 20px !important;
+}
+
+.nav-link {
+  font-family: "Amsterdam_One";
+  color: #ff2a71 !important;
+  font-size: 20px !important;
+}
+.navbar {
+  border-bottom: 2px solid #ff2a71;
+  padding: 10px;
+  box-shadow: 6px 4px 16px #ff2a71;
+}

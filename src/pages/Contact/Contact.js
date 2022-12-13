@@ -1,6 +1,6 @@
 import React from "react";
-import "./style.css";
+import BgParallax1 from "../../assets/backgrounds/BgParallax1";
 
 export default function Contact() {
-  return <div></div>;
+  return <BgParallax1 />;
 }
