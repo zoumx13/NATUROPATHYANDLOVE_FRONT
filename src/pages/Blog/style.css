@@ -1,0 +1,30 @@
+.cards {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 15vh;
+  justify-content: space-between;
+}
+.card {
+  margin-bottom: 5%;
+  display: flex;
+}
+
+.date {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  right: 0;
+  position: absolute;
+  background-color: #ff2a71;
+  color: white;
+  width: 20%;
+  height: 20%;
+}
+h5 {
+  font-family: "Magnolia_Script";
+}
+p {
+  font-family: "Lustria_Regular";
+}

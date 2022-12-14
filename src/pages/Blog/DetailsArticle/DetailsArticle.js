@@ -9,26 +9,28 @@ import {
   ContentState,
   convertFromHTML,
 } from "draft-js";
-import { Button, Modal, Form } from "react-bootstrap";
-import BgParallax2 from "../../../assets/backgrounds/BgParallax2";
+import { Button, Modal, Form, OverlayTrigger, Tooltip } from "react-bootstrap";
+import BgParallax4 from "../../../assets/backgrounds/BgParallax4";
 import "draft-js/dist/Draft.css";
 import "./style.css";
 
-export default function DetailsPrestation() {
+export default function DetailsArticle() {
   const { identifiant, setIdentifiant } = useContext(userContext);
   const navigate = useNavigate();
-  let { idPrestation } = useParams();
-  const [prestation, setPrestation] = useState([]);
+  let { idArticle } = useParams();
+  const [modifyArticle, setModifyArticle] = useState(false);
+  const [publish, setPublish] = useState();
+  const [checked, setChecked] = useState();
+  const [article, setArticle] = useState([]);
+  const [text, setText] = useState([]);
   const [edit, setEdit] = useState();
   const [titleModify, setTitleModify] = useState();
   const [subtitleModify, setSubtitleModify] = useState();
-  const [resumeModify, setResumeModify] = useState();
-  const [prestationModify, setPrestationModify] = useState(false);
-  const [descriptionModify, setDescriptionModify] = useState();
-  const [refresh, setRefresh] = useState(false);
-  const [paragraphe, setParagraphe] = useState([]);
+  const [textModify, setTextModify] = useState();
+  const [displayModify, setDisplayModify] = useState();
   const [concat, setConcat] = useState("");
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [refresh, setRefresh] = useState(false);
   const [addImg, setAddImg] = useState(false);
   const [img, setImg] = useState();
 
@@ -120,7 +122,7 @@ export default function DetailsPrestation() {
               let result = JSON.stringify(convertToRaw(current));
               // console.log(test2); /*ARRAY OF OBJECT */
               setEdit("");
-              setDescriptionModify(result);
+              setTextModify(result);
               setIsOpen(true);
             }}
           >
@@ -131,23 +133,30 @@ export default function DetailsPrestation() {
       </div>
     );
   }
-  async function getPrestationDetails(idPrestation) {
+  async function getArticleDetails(idArticle) {
     let options = {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     };
     let response = await fetch(
-      `http://127.0.0.1:8080/getPrestationDetails/${idPrestation}`,
+      `http://127.0.0.1:8080/getPost/${idArticle}`,
       options
     );
     let donnees = await response.json();
     if (!donnees) {
       return;
     } else {
-      setPrestation(donnees);
-      let textToParse = JSON.parse(donnees.description);
+      setArticle(donnees);
+      if (donnees.display === true) {
+        setPublish("En ligne");
+        setChecked(true);
+      } else {
+        setPublish("Hors ligne");
+        setChecked(false);
+      }
+      let textToParse = JSON.parse(donnees.text);
       let onlyText = textToParse.blocks;
-      setParagraphe(onlyText);
+      setText(onlyText);
       let concat = "";
       onlyText.map((item) => {
         if (item.type === "header-five" && item.text !== "") {
@@ -166,7 +175,7 @@ export default function DetailsPrestation() {
       });
     }
   }
-  const deletePrestation = async (idPrestation) => {
+  const deletePost = async (idArticle) => {
     let options = {
       method: "DELETE",
       headers: {
@@ -175,21 +184,20 @@ export default function DetailsPrestation() {
       },
     };
     let response = await fetch(
-      `http://127.0.0.1:8080/deletePrestation/${idPrestation}`,
+      `http://127.0.0.1:8080/deletePost/${idArticle}`,
       options
     );
     await response.json();
-    alert(`Prestation supprimée.`);
-    navigate("/prestations");
+    alert(`Article supprimé.`);
+    navigate("/blog");
   };
-  const updatePrestation = async () => {
+  const updateArticle = async () => {
     let data = {
       title: titleModify,
       subtitle: subtitleModify,
-      resume: resumeModify,
-      description: descriptionModify,
+      text: textModify,
+      display: displayModify,
     };
-    console.log("data", data);
     let options = {
       method: "PATCH",
       headers: {
@@ -199,11 +207,35 @@ export default function DetailsPrestation() {
       body: JSON.stringify(data),
     };
     let reponse = await fetch(
-      `http://127.0.0.1:8080/modifyPrestation/${idPrestation}/`,
+      `http://127.0.0.1:8080/modifyPost/${article._id}/`,
       options
     );
     let donnees = await reponse.json();
+    console.log("DONNEES", JSON.parse(donnees.docs.text));
     alert(`Article mis à jour`);
+    clear();
+    setRefresh(!refresh);
+  };
+  const updatePublish = async (props) => {
+    let data = {
+      title: titleModify,
+      subtitle: subtitleModify,
+      text: textModify,
+      display: props,
+    };
+    let options = {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+      body: JSON.stringify(data),
+    };
+    let reponse = await fetch(
+      `http://127.0.0.1:8080/modifyPost/${article._id}/`,
+      options
+    );
+    await reponse.json();
     clear();
     setRefresh(!refresh);
   };
@@ -226,7 +258,7 @@ export default function DetailsPrestation() {
         body: formData,
       };
       const response = await fetch(
-        `http://127.0.0.1:8080/createImagePrestation/${idPrestation}`,
+        `http://127.0.0.1:8080/createImageArticle/${idArticle}`,
         options
       );
       let result = await response.json();
@@ -249,114 +281,104 @@ export default function DetailsPrestation() {
     setEdit();
     setTitleModify();
     setSubtitleModify();
-    setResumeModify();
-    setDescriptionModify();
-    setPrestationModify(false);
+    setTextModify();
+    setDisplayModify();
+    setModifyArticle(false);
     setIsOpen(false);
     setAddImg(false);
     setImg();
   };
+
   useEffect(() => {
-    getPrestationDetails(idPrestation);
+    getArticleDetails(idArticle);
   }, [refresh]);
 
   return (
     <div>
       {" "}
-      <BgParallax2 />
+      <BgParallax4 />
       <div className="prestationDetails">
         <div className="bigtitleDetails">
+          {/* BTN SUPP ARTICLE */}
           {identifiant && (
             <>
+              <Form.Check
+                type="switch"
+                id="custom-switch"
+                label={publish}
+                checked={checked}
+                onChange={(e) => {
+                  setChecked(!checked);
+                  setDisplayModify(!checked);
+                  updatePublish(e.target.checked);
+                }}
+              />
+
               <div className="btnAdminArticle ">
                 {" "}
                 <Button
-                  value={idPrestation}
+                  value={idArticle}
                   onClick={(e) => {
-                    deletePrestation(e.target.value);
+                    deletePost(e.target.value);
                   }}
                 >
-                  Supprimer la prestation
+                  Supprimer l'article
                 </Button>
                 <Button
-                  value={idPrestation}
+                  value={idArticle}
                   onClick={() => {
-                    setPrestationModify(true);
+                    setModifyArticle(true);
                   }}
                 >
-                  Modifier la prestation
+                  Modifier l'article
                 </Button>
               </div>
             </>
           )}
           {/* INPUT MODIF TITLE*/}
           <div className={hover()}>
-            {edit === prestation.title && identifiant ? (
+            {edit === article.title && identifiant ? (
               <>
                 <input
-                  placeholder={prestation.title}
-                  defaultValue={prestation.title}
+                  placeholder={article.title}
+                  defaultValue={article.title}
                   onChange={(e) => setTitleModify(e.target.value)}
                 />
-                <Button onClick={() => updatePrestation()}>Valider</Button>
+                <Button onClick={() => updateArticle()}>Valider</Button>
                 <Button onClick={() => clear()}>Annuler</Button>
               </>
             ) : (
               <h3
                 onClick={() => {
-                  setEdit(prestation.title);
+                  setEdit(article.title);
                 }}
                 className="titlePrestation"
               >
-                {prestation.title}{" "}
+                {article.title}{" "}
               </h3>
             )}
           </div>
           {/* INPUT MODIF SUBTITLE*/}
           <div className={hover()}>
-            {edit === prestation.subtitle && identifiant ? (
+            {edit === article.subtitle && identifiant ? (
               <>
                 <input
-                  placeholder={prestation.subtitle}
-                  defaultValue={prestation.subtitle}
+                  placeholder={article.subtitle}
+                  defaultValue={article.subtitle}
                   onChange={(e) => setSubtitleModify(e.target.value)}
                 />
-                <Button onClick={() => updatePrestation()}>Valider</Button>
+                <Button onClick={() => updateArticle()}>Valider</Button>
                 <Button onClick={() => clear()}>Annuler</Button>
               </>
             ) : (
               <h4
                 onClick={() => {
-                  setEdit(prestation.subtitle);
+                  setEdit(article.subtitle);
                 }}
                 className="subtitlePrestation"
               >
-                {prestation.subtitle}{" "}
+                {article.subtitle}{" "}
               </h4>
-            )}
-          </div>
-          {/* INPUT MODIF RESUME*/}
-          <div className={hover()}>
-            {edit === prestation.resume && identifiant ? (
-              <>
-                <input
-                  placeholder={prestation.resume}
-                  defaultValue={prestation.resume}
-                  onChange={(e) => setResumeModify(e.target.value)}
-                />
-                <Button onClick={() => updatePrestation()}>Valider</Button>
-                <Button onClick={() => clear()}>Annuler</Button>
-              </>
-            ) : identifiant ? (
-              <p
-                onClick={() => {
-                  setEdit(prestation.resume);
-                }}
-              >
-                {`(Résumé : ${prestation.resume})`}
-              </p>
-            ) : (
-              <></>
             )}
           </div>
         </div>
@@ -366,13 +388,13 @@ export default function DetailsPrestation() {
           <div className="seperateExt"></div>
         </div>
 
-        {/* PARAGRAPHE PRESTATION */}
-        {prestationModify === false ? (
+        {/* TEXT ARTICLE */}
+        {modifyArticle === false ? (
           <>
-            {paragraphe.length > 0 && (
+            {text.length > 0 && (
               <>
                 <div className="textDetails">
-                  {paragraphe.map((text) => {
+                  {text.map((text) => {
                     if (text.type === "unstyled") {
                       return (
                         <p key={text.text} className="paragraphePrestation">
@@ -391,19 +413,25 @@ export default function DetailsPrestation() {
 
                 <div className="pictureDetails">
                   {identifiant ? (
-                    <img
-                      onClick={() => {
-                        setAddImg(true);
-                        setIsOpen(true);
-                      }}
-                      className="imgDetails"
-                      src={`http://127.0.0.1:8080/prestations/${prestation.imgIllustration}`}
-                      alt=""
-                    />
+                    <OverlayTrigger
+                      overlay={
+                        <Tooltip id="tooltip-disabled">Tooltip!</Tooltip>
+                      }
+                    >
+                      <img
+                        onClick={() => {
+                          setAddImg(true);
+                          setIsOpen(true);
+                        }}
+                        className="imgDetails"
+                        src={`http://127.0.0.1:8080/articles/${article.imgIllustration}`}
+                        alt=""
+                      />
+                    </OverlayTrigger>
                   ) : (
                     <img
                       className="imgDetails"
-                      src={`http://127.0.0.1:8080/prestations/${prestation.imgIllustration}`}
+                      src={`http://127.0.0.1:8080/articles/${article.imgIllustration}`}
                       alt=""
                     />
                   )}
@@ -435,7 +463,7 @@ export default function DetailsPrestation() {
               <img
                 className="addImg"
                 alt=""
-                src={`http://127.0.0.1:8080/prestations/${prestation.imgIllustration}`}
+                src={`http://127.0.0.1:8080/articles/${article.imgIllustration}`}
               />
             )}
             {addImg && img && (
@@ -464,7 +492,7 @@ export default function DetailsPrestation() {
             </Button>
           ) : (
             <Button
-              onClick={() => updatePrestation()}
+              onClick={() => updateArticle()}
               type="submit"
               className="btnLog"
             >

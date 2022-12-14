@@ -13,20 +13,23 @@
 .textDetails {
   width: 100%;
 }
-h3 {
+.titlePrestation {
   font-family: "Amsterdam_One";
   color: #da0f4c;
-  font-size: 50px !important;
+  font-size: 50px;
   padding-bottom: 20px;
 }
-h4 {
+.subtitlePrestation {
   font-family: "Magnolia_Script";
-  font-size: 20px !important;
+  font-size: 20px;
+  color: #0f797d;
 }
-p {
+.paragraphePrestation {
   padding-top: 20px;
+  text-align: justify;
   font-family: "Lustria_Regular";
-  font-size: 14px !important;
+  color: #9d1949;
+  font-size: 14px;
 }
 
 .imgDetails {

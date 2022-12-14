@@ -33,17 +33,17 @@
   width: 33%;
 }
 
-h3 {
+.titlePrestations {
   font-family: "Amsterdam_One";
   color: #da0f4c;
   font-size: 50px !important;
   padding-bottom: 20px;
 }
-h4 {
+.subtitlePrestations {
   font-family: "Magnolia_Script";
   font-size: 20px !important;
 }
-p {
+.resume {
   padding-top: 20px;
   font-family: "Lustria_Regular";
   font-size: 14px !important;

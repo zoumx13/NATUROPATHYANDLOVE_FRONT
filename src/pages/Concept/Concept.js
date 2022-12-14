@@ -29,20 +29,36 @@ export default function Concept() {
     <div>
       <BgParallax1 />
       {concept.length > 0 ? (
-        <div>
-          <h2>{concept[0].resume}</h2>
+        <div className="detailsQui">
+          <h2 className="resumeQui">{concept[0].resume}</h2>
           {concept[0].description.map((description) => {
             return (
-              <div>
-                <h3>{description.subtitle}</h3>
-                <p>{description.paragraphe}</p>
+              <div className="textQui">
+                <h3 className="subtitleQui">{description.subtitle}</h3>
+                <p className="paragrapheQui">{description.paragraphe}</p>
               </div>
             );
           })}
+          <div className="containerImgConcept">
+            {concept[0].imgIllustration.map((img) => {
+              return (
+                <img
+                  className="imgQui"
+                  src={`http://127.0.0.1:8080/concept/${img}`}
+                  alt=""
+                />
+              );
+            })}
+          </div>
         </div>
       ) : (
         <></>
       )}
+      <div className="seperate">
+        <div className="seperateExt"></div>
+        <div className="seperateMiddle"></div>
+        <div className="seperateExt"></div>
+      </div>
     </div>
   );
 }

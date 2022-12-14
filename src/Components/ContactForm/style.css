@@ -1,0 +1,15 @@
+.contact {
+  margin: 10%;
+}
+.col-md-12 {
+  margin-bottom: 3%;
+}
+.RGPD {
+  font-size: 10px;
+  text-align: justify;
+}
+.contact {
+  border: 2px solid #ff2a71;
+  padding: 10px;
+  box-shadow: 6px 4px 16px #ff2a71;
+}

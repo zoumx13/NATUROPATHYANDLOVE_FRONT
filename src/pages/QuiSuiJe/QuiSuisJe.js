@@ -28,20 +28,36 @@ export default function QuiSuisJe() {
     <div>
       <BgParallax1 />
       {quiSuisJe.length > 0 ? (
-        <div>
-          <h2>{quiSuisJe[0].resume}</h2>
+        <div className="detailsQui">
+          <h2 className="resumeQui">{quiSuisJe[0].resume}</h2>
           {quiSuisJe[0].description.map((description) => {
             return (
-              <div>
-                <h3>{description.subtitle}</h3>
-                <p>{description.paragraphe}</p>
+              <div className="textQui">
+                <h3 className="subtitleQui">{description.subtitle}</h3>
+                <p className="paragrapheQui">{description.paragraphe}</p>
               </div>
             );
           })}
+          <div className="containerImgConcept">
+            {quiSuisJe[0].imgIllustration.map((img) => {
+              return (
+                <img
+                  className="imgQui"
+                  src={`http://127.0.0.1:8080/quisuisje/${img}`}
+                  alt=""
+                />
+              );
+            })}
+          </div>
         </div>
       ) : (
         <></>
       )}
+      <div className="seperate">
+        <div className="seperateExt"></div>
+        <div className="seperateMiddle"></div>
+        <div className="seperateExt"></div>
+      </div>
     </div>
   );
 }
