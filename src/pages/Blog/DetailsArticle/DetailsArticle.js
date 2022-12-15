@@ -9,7 +9,7 @@ import {
   ContentState,
   convertFromHTML,
 } from "draft-js";
-import { Button, Modal, Form, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Button, Modal, Form} from "react-bootstrap";
 import BgParallax4 from "../../../assets/backgrounds/BgParallax4";
 import "draft-js/dist/Draft.css";
 import "./style.css";
@@ -413,11 +413,6 @@ export default function DetailsArticle() {
 
                 <div className="pictureDetails">
                   {identifiant ? (
-                    <OverlayTrigger
-                      overlay={
-                        <Tooltip id="tooltip-disabled">Tooltip!</Tooltip>
-                      }
-                    >
                       <img
                         onClick={() => {
                           setAddImg(true);
@@ -427,7 +422,6 @@ export default function DetailsArticle() {
                         src={`http://127.0.0.1:8080/articles/${article.imgIllustration}`}
                         alt=""
                       />
-                    </OverlayTrigger>
                   ) : (
                     <img
                       className="imgDetails"
