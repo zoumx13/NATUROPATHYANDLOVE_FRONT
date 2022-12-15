@@ -96,8 +96,8 @@ export default function Home() {
     if (!data) {
       return;
     } else {
-      setQuiSuisJe(data[0].quiSuisJe);
-      setConcept(data[0].concept);
+      setQuiSuisJe(data[0]);
+      setConcept(data[1]);
     }
   }
   async function getGalerie() {
@@ -145,8 +145,8 @@ export default function Home() {
           </p>
           <Button
             onClick={() =>
-              (window.location.href =
-                "https://www.crenolib.fr/therapeute/naturopathe/marseille/13007/66066-sophie_leotard")
+            (window.location.href =
+              "https://www.crenolib.fr/therapeute/naturopathe/marseille/13007/66066-sophie_leotard")
             }
           >
             Prendre rendez-vous
@@ -154,7 +154,7 @@ export default function Home() {
         </div>
       </header>{" "}
       <div className="category">
-        {quiSuisJe.length > 0 && (
+        {quiSuisJe && (
           <div className="quisuije">
             <h2 className="h2home">Qui suis-je ?</h2>
             <div className="seperate">
@@ -162,7 +162,7 @@ export default function Home() {
               <div className="seperateMiddle"></div>
               <div className="seperateExt"></div>
             </div>
-            <p>{quiSuisJe[0].resume}</p>
+            <p>{quiSuisJe.resume}</p>
             <Button
               onClick={() => {
                 navigate("/quisuisje");
@@ -170,24 +170,12 @@ export default function Home() {
             >
               Lire la suite
             </Button>
-            <div className="containerImgQui">
-              {quiSuisJe[0].imgIllustration.map((img) => {
-                return (
-                  <img
-                    key={"quisuisjeImg" + img}
-                    className="imgQui"
-                    src={`http://127.0.0.1:8080/quisuisje/${img}`}
-                    alt=""
-                  />
-                );
-              })}
-            </div>
           </div>
         )}
       </div>
       <BgParallax1 />
       <div className="category">
-        {concept.length > 0 && (
+        {concept && (
           <div className="concept">
             <h2 className="h2home">
               Naturopathie et Naturopathy And Love : concept
@@ -197,7 +185,7 @@ export default function Home() {
               <div className="seperateMiddle"></div>
               <div className="seperateExt"></div>
             </div>
-            <p>{concept[0].resume}</p>
+            <p>{concept.resume}</p>
             <Button
               onClick={() => {
                 navigate("/concept");
@@ -205,18 +193,6 @@ export default function Home() {
             >
               Lire la suite
             </Button>
-            <div className="containerImgConcept">
-              {concept[0].imgIllustration.map((img) => {
-                return (
-                  <img
-                    key={"conceptImg" + img}
-                    className="imgConcept"
-                    src={`http://127.0.0.1:8080/concept/${img}`}
-                    alt=""
-                  />
-                );
-              })}
-            </div>
           </div>
         )}
       </div>
@@ -248,7 +224,7 @@ export default function Home() {
             {allPrestations.map((prestation) => {
               return (
                 <li className="liPrestations" key={"home" + prestation._id}>
-                  <a className="" href="">
+                  <a className="" href={`/prestations/${prestation._id}`}>
                     {prestation.title}
                   </a>
                 </li>
@@ -313,7 +289,7 @@ export default function Home() {
                     src={`http://127.0.0.1:8080/galerie/${img.imgIllustration}`}
                     alt=""
                   />
-                );
+                )
               })}
             </div>
           </div>
@@ -327,3 +303,4 @@ export default function Home() {
     </div>
   );
 }
+
