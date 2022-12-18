@@ -13,10 +13,12 @@ import Blog from "./pages/Blog/Blog";
 import DetailsArticle from "./pages/Blog/DetailsArticle/DetailsArticle";
 import Contact from "./pages/Contact/Contact";
 import "bootstrap/dist/css/bootstrap.min.css";
+import ScrollToTop from "./Components/ScrollTop/ScrollTop";
 
 function App() {
   return (
     <BrowserRouter>
+    <ScrollToTop/>
       <NavBar />
       <Routes>
         <Route path="/" exact element={<Home></Home>}></Route>
