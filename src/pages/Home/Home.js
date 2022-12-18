@@ -145,8 +145,8 @@ export default function Home() {
           </p>
           <Button
             onClick={() =>
-            (window.location.href =
-              "https://www.crenolib.fr/therapeute/naturopathe/marseille/13007/66066-sophie_leotard")
+              (window.location.href =
+                "https://www.crenolib.fr/therapeute/naturopathe/marseille/13007/66066-sophie_leotard")
             }
           >
             Prendre rendez-vous
@@ -289,7 +289,7 @@ export default function Home() {
                     src={`http://127.0.0.1:8080/galerie/${img.imgIllustration}`}
                     alt=""
                   />
-                )
+                );
               })}
             </div>
           </div>
@@ -303,4 +303,3 @@ export default function Home() {
     </div>
   );
 }
-

@@ -78,7 +78,11 @@ export default function Blog() {
 
   return (
     <div className="blog">
-      <BgParallax4 />
+      <BgParallax4>
+        <div>
+          <h1>HELLLLLLLLLLLLLLLLLLLLLLO</h1>
+        </div>
+      </BgParallax4>
       {identifiant && (
         <Button onClick={() => setIsOpen(true)}>Créer un article</Button>
       )}

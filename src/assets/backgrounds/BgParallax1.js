@@ -3,10 +3,6 @@ import galerie1 from "./galerie1.jpg";
 
 export default function BgParallax1() {
   return (
-    <Parallax className="image" bgImage={galerie1} strength={200}>
-      <div className="content">
-        <h1 className="img-txt"></h1>
-      </div>
-    </Parallax>
+    <Parallax className="image" bgImage={galerie1} strength={200}></Parallax>
   );
 }
